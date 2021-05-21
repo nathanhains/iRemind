@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_170213) do
+ActiveRecord::Schema.define(version: 2021_05_21_175229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 2021_05_21_170213) do
     t.boolean "complete", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "list_id"
+    t.index ["list_id"], name: "index_reminders_on_list_id"
   end
 
+  add_foreign_key "reminders", "lists"
 end
