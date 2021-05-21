@@ -5,3 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+lunch = Reminder.create(name: "Meet with betty", description: "She said to not forget!!", date: "05-25-2021", time: "6:00")
