@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 list = List.create(name: "Forgetful List", color: "Black")
-lunch = Reminder.create(name: "Meet with betty", description: "She said to not forget!!", date: "05-25-2021", time: "6:00")
+lunch = Reminder.create(name: "Meet with betty", description: "She said to not forget!!", date: "05-25-2021", time: "6:00", list_id: list.id)
