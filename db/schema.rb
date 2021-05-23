@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_175229) do
     t.boolean "complete", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "list_id"
+    t.bigint "list_id", null: false
     t.index ["list_id"], name: "index_reminders_on_list_id"
   end
 
