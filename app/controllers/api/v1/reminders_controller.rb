@@ -2,7 +2,8 @@ class Api::V1::RemindersController < ApplicationController
 
     def index
         reminders = Reminder.all
-        render json: reminders
+        # renders route in a more compact way: data/attributes
+        render json: ReminderSerializer.new(reminders)
     end
 
     def create
@@ -10,8 +11,8 @@ class Api::V1::RemindersController < ApplicationController
         if reminder.save
             render json: reminder, status: accepted
         else
-            #failed validations, throw up 422 error unprocessible
-            render: {errors: reminder.errors.full_messages}, status: :unprocessable_entity
+            # failed validations, throw up 422 error unprocessible
+            render json: {errors: reminder.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
