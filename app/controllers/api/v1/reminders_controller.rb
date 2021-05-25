@@ -13,7 +13,7 @@ class Api::V1::RemindersController < ApplicationController
             render json: ReminderSerializer.new(reminder), status: :accepted
         else
             # failed validations, throw up 422 error unprocessible
-            render json: {errors: reminder.errors.full_messages}, status: :unprocessable_entity
+            render json: {status:400, errors: reminder.errors.full_messages.join(", ")}, status: :unprocessable_entity
         end
     end
 
@@ -21,7 +21,7 @@ class Api::V1::RemindersController < ApplicationController
         if @reminder.update(reminder_params)
             render json: @reminder
         else
-            render json: @reminder.errors, status: :unprocessable_entity
+            render json: { status: 400, errors: @reminder.errors.full_messages.join(", ")}, status: :unprocessable_entity
         end
     end
 
