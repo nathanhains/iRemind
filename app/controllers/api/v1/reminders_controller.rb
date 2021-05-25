@@ -1,5 +1,5 @@
 class Api::V1::RemindersController < ApplicationController
-    before_action :find_reminder, only: [:show, :destroy]
+    before_action :find_reminder, only: [:update, :destroy]
 
     def index
         reminders = Reminder.all
@@ -14,6 +14,14 @@ class Api::V1::RemindersController < ApplicationController
         else
             # failed validations, throw up 422 error unprocessible
             render json: {errors: reminder.errors.full_messages}, status: :unprocessable_entity
+        end
+    end
+
+    def update
+        if @reminder.update(reminder_params)
+            render json: @reminder
+        else
+            render json: @reminder.errors, status: :unprocessable_entity
         end
     end
 
