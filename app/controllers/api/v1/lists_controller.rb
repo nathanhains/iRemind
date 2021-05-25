@@ -11,7 +11,7 @@ class Api::V1::ListsController < ApplicationController
             render json: ListSerializer.new(list), status: :accepted
         else
             # failed validations, throw up 422 error unprocessible
-            render json: {errors: list.errors.full_messages}, status: :unprocessable_entity
+            render json: {status: 400, errors: list.errors.full_messages.join(", ")}, status: :unprocessable_entity
         end
     end
 
@@ -19,6 +19,5 @@ class Api::V1::ListsController < ApplicationController
 
     def list_params
         params.require(:list).permit(:name, :color)
-        params.permit()
     end
 end
