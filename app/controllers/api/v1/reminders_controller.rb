@@ -1,4 +1,5 @@
 class Api::V1::RemindersController < ApplicationController
+    before_action :find_reminder, only: [:show, :destroy]
 
     def index
         reminders = Reminder.all
@@ -16,7 +17,19 @@ class Api::V1::RemindersController < ApplicationController
         end
     end
 
+    def destroy
+        if @reminder.destroy
+            render json: {message: "Successfully deleted", reminder: @reminder}
+        else
+            render json: {message: "Failed to delete"}
+        end
+    end
+
     private
+
+    def find_reminder
+        @reminder = Reminder.find(params[:id])
+    end
 
     def reminder_params
         params.require(:reminder).permit(:name, :description, :date, :time, :list_id)
