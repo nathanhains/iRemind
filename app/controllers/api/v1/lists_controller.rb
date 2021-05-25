@@ -1,4 +1,6 @@
 class Api::V1::ListsController < ApplicationController
+    before_action :find_list, only: [:update, :destroy]
+
     def index
         lists = List.all
         # renders route in a more compact way: data/attributes
@@ -15,7 +17,19 @@ class Api::V1::ListsController < ApplicationController
         end
     end
 
+    def update
+        if @list.update(list_params)
+            render json: @list
+        else
+            render json: { status: 400, errors: @list.errors.full_messages.join(", ")}, status: :unprocessable_entity
+        end
+    end
+
     private
+
+    def find_list
+        @list = List.find(params[:id])
+    end
 
     def list_params
         params.require(:list).permit(:name, :color)
