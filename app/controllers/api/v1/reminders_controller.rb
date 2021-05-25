@@ -9,7 +9,7 @@ class Api::V1::RemindersController < ApplicationController
     def create
         reminder = Reminder.new(reminder_params)
         if reminder.save
-            render json: reminder, status: accepted
+            render json: reminder, status: :accepted
         else
             # failed validations, throw up 422 error unprocessible
             render json: {errors: reminder.errors.full_messages}, status: :unprocessable_entity
@@ -19,8 +19,7 @@ class Api::V1::RemindersController < ApplicationController
     private
 
     def reminder_params
-        params.require(:reminder).permit(:name, :description, :date, :time, :complete, :list_id)
-        params.permit()
+        params.require(:reminder).permit(:name, :description, :date, :time, :list_id)
     end
 
 end

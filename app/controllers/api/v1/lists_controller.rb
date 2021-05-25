@@ -8,7 +8,7 @@ class Api::V1::ListsController < ApplicationController
     def create
         list = List.new(list_params)
         if list.save
-            render json: list, status: accepted
+            render json: list, status: :accepted
         else
             # failed validations, throw up 422 error unprocessible
             render json: {errors: list.errors.full_messages}, status: :unprocessable_entity

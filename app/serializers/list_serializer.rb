@@ -1,4 +1,4 @@
 class ListSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name, :color
+  attributes :name, :color, :reminders
 end
