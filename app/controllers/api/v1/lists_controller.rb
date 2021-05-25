@@ -25,6 +25,14 @@ class Api::V1::ListsController < ApplicationController
         end
     end
 
+    def destroy
+        if @list.destroy
+            render json: {message: "Successfully deleted", list: @list}
+        else
+            render json: {message: "Failed to delete"}
+        end
+    end
+
     private
 
     def find_list
